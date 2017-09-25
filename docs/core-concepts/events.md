@@ -26,16 +26,29 @@ An event is a message sent from an event emitter to signify the occurrence of a 
 
 The NativeScript framework provides a class `Observable` that powers the process of working with events. Find more information about it in the [API Reference](http://docs.nativescript.org/api-reference/classes/_data_observable_.observable.html). Because it is one of the base classes within the NativeScript framework, almost every NativeScript object (component) has an option for dealing with events.
 
+NativeScript框架提供一个驱动事件工作流程的`Observable`类，你可以在 [API索引](http://docs.nativescript.org/api-reference/classes/_data_observable_.observable.html)中查看更多信息。鉴于它是NativeScript框架中最基础的类之一，几乎每一个NativeScript对象（或组件）都拥有处理事件的选项。
+
 ## Adding an Event Handler
+
+## 增加一个事件处理器
 
 To add an **event handler** means setting a function (method) that executes when the event is raised.
 
+增加一个**event handler（事件处理器）**意味着设置一个在特定事件发生时被执行的函数（或方法）。
+
 __Example 1__ shows how to set a function that prints a "Hello World!" message in the console when a button is tapped. You can choose between the shorthand syntax and the full syntax or you can declare the event handler in XML.
+
+__例一__ 本例展示了如何设置一个当按钮被按下时向控制台输出"Hello, World!"消息的函数。你可以选择使用简写语法（shorthand syntax）或者是完整语法（full syntax）。你也可以在XML中声明一个事件处理器。
 
 
 The example below shows how to add an event listener by using the short and full syntax. There is a third optional parameter that represents the `this` argument.
 
-###Example 1 (JavaScript): Adding an event handler or an event listener using the short and full syntax.
+下面这个例子展示了如何使用简写语法和完整语法来增加事件监听器（event listener）。第三个参数是一个可选的用于表示`this`的参数。
+
+### Example 1 (JavaScript): Adding an event handler or an event listener using the short and full syntax.
+
+### 例1（JavaScript）：使用简写语法和完整语法来增加事件监听器。
+
 ``` JavaScript
 //Adding a listener with the short syntax
 var buttonModule = require("ui/button");
