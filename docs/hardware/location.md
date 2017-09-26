@@ -12,7 +12,7 @@ previous_url: /location
 
 > **IMPORTANT:** Starting with NativeScript 1.5.0, the built-in Location module is deprecated. To implement geolocation in your apps, use the `nativescript-geolocation` plugin, available via npm. This plugin provides an API similar to the [W3C Geolocation API](http://dev.w3.org/geo/api/spec-source.html). 
 
-> **重要信息:** 内建的地理位置模块将从NativeScript 1.5.0版本开始被弃用。若要在应用中实现地理位置处理功能, 可用npm安装`nativescript-geolocation`插件。该插件提供了类似于[W3C Geolocation API](http://dev.w3.org/geo/api/spec-source.html)的API。
+> **重要信息:** 内建的地理位置模块将从NativeScript 1.5.0版本开始被弃用。若要在应用中实现地理位置处理功能, 可用npm安装`nativescript-geolocation`插件。该插件提供了与[W3C Geolocation API](http://dev.w3.org/geo/api/spec-source.html)相仿的API。
 
 The most important difference between the deprecated module and the new plugin is that location monitoring via the plugin returns an `id` that you can use to stop location monitoring. The `nativescript-geolocation` plugin also uses an accuracy criteria approach to deliver geolocation. This means that getting a location is powered by the most accurate location provider that is available. For example, if a GPS signal is available and the GPS provider is enabled, the plugin uses GPS; if GPS is not connected, the device falls back to other available providers such as Wi-Fi networks or cell towers).
 
