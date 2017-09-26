@@ -70,7 +70,7 @@ NativeScript has a universal way to check if location services are turned on&mda
 
 By default, the `nativescript-geolocation` plugin adds the required permissions in `AndroidManiest.xml` for Android and `Info.plist` for iOS. For iOS, the plugin adds two dummy string values which serve as the message when the platform asks for permission to use location services. You can edit this message later. 
 
-`nativescript-geolocation`会默认在Android平台下的`AndroidManiest.xml`和iOS平台下的`Info.plist`中添加所需的权限。此外，在iOS平台下，插件添加了两个空字符串作为提示语句，它们将会在平台向用户请求位置服务权限时使用。你可以事后对其进行修改。
+`nativescript-geolocation`会默认在Android平台下的`AndroidManiest.xml`和iOS平台下的`Info.plist`中添加所需的权限。此外，在iOS平台下，插件添加了两个空字符串作为提示语句，它们将会在平台向用户请求位置服务权限时使用。你可以在之后修改它。
 
 After you install the plugin, you can request to use location services in the app with the code in __Example 1__:
 

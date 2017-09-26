@@ -12,7 +12,7 @@ environment: angular
 
 Welcome to the NativeScript & Angular getting started guide. In this hands-on tutorial, you’ll build a cross-platform iOS and Android app from scratch.
 
-欢迎来到NativeScript与Angular快速上手教程。在这个实战教程中，你将会从头开始构建一个横跨iOS与Android平台的App。
+欢迎来到NativeScript与Angular快速上手教程。在本次实战中，你将会从头开始构建一个横跨iOS与Android平台的App。
 
 ## Table of contents
 
@@ -21,13 +21,13 @@ Welcome to the NativeScript & Angular getting started guide. In this hands-on tu
 - [0.1: What is NativeScript? What is Angular?](#01-what-is-nativescript-what-is-angular)
 - [0.1: 什么是NativeScript?什么是Angular?](#01-what-is-nativescript-what-is-angular)
 - [0.2: Prerequisites](#02-prerequisites)
-- [0.2: 前置知识](#02-prerequisites)
+- [0.2: 预备知识](#02-prerequisites)
 - [0.3: Installation](#03-installation)
 - [0.3: 安装](#03-installation)
 
 > **TIP**: If you’re a video learner, the third-party site NativeScripting has a [free video course](https://nativescripting.com/course/nativescript-with-angular-getting-started-guide) that walks you through this guide step by step.
 
-> **提示**: 如果你喜欢用视频的方式进行学习，在第三方网站NativeScripting中有一个[免费的视频课程](https://nativescripting.com/course/nativescript-with-angular-getting-started-guide)，它可以一步一步教程你完成本教程。
+> **提示**: 如果你喜欢用视频的方式进行学习，在第三方网站NativeScripting中有一个[免费的视频课程](https://nativescripting.com/course/nativescript-with-angular-getting-started-guide)，它会一步一步带你完成本教程。
 
 ## 0.1: What is NativeScript? What is Angular?
 
@@ -63,7 +63,7 @@ The result is a software architecture that allows you to build mobile apps using
 
 ## 0.2: Prerequisites
 
-## 0.2: 前置知识
+## 0.2: 预备知识
 
 This guide assumes that you have some basic knowledge of JavaScript, CSS, and your development machine’s terminal. More specifically:
 
