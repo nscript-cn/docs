@@ -1,6 +1,6 @@
 ---
-title: Events
-description: How to handle events in NativeScript.
+title: Events 事件
+description: How to handle events in NativeScript. 如何在NativeScript中处理事件。
 position: 90
 slug: events
 environment: nativescript
@@ -8,6 +8,8 @@ previous_url: /events
 ---
 
 # Events
+
+# 事件
 
 Contents of this article:
 
@@ -39,7 +41,7 @@ Contents of this article:
 
 * [Working with weak events](#working-with-weak-events)
 
-  [使用weak events](#working-with-weak-events)
+  [使用弱事件](#working-with-weak-events)
 
 
 ## Overview
@@ -147,7 +149,7 @@ You need a code-behind file (see __Example 2__) to write the function body (the 
 
 ### Example 2: Hooking to a button tap event
 
-### 例2：挂靠到按下按钮的事件上
+### 例2：挂靠（Hook）到按下按钮的事件上
 
 ``` JavaScript
 function onTap(eventData) {
@@ -235,7 +237,7 @@ observableObject.on(observableModule.Observable.propertyChangeEvent, function(pr
 
 It is important to note that the `propertyChange` event is critical for the entire [data binding]({% slug binding %}) system. To take advantage of the data binding mechanism, all you have to do is make your business object **inherit** the `Observable` class. __Example 5__ demonstrates how to do that.
 
-需要注意的是，`propertyChange`事件对于整个[数据绑定]({% slug binding %})系统都是不安全的。如果想要使用数据绑定带来的优势，你只需要让你的对象**继承（inherit）**自`Observable`类就可以了。__例5__ 是一个示范。
+需要注意的是，`propertyChange`事件对于整个[数据绑定]({% slug binding %})系统都是不安全的。如果想要使用数据绑定带来的优势，你只需要让你的业务对象**继承（inherit）**自`Observable`类就可以了。__例5__ 是一个示范。
 
 ### Example 5: Handle the propertyChange event via XML
 
@@ -324,9 +326,11 @@ __例6__ 中的代码片段在指定属性的值改变时触发`propertyChange`�
 
 If your business logic demands it, you may want to fire (raise or emit) a custom event on a particular action (see __Example 7__). To do that, call the `Observable.notify()` method when the action is completed. This method takes any **implementer** of the [EventData interface](http://docs.nativescript.org/api-reference/interfaces/_data_observable_.eventdata.html) as event data. It includes basic information about an event&mdash;its name as `eventName` and an instance of the event sender as `object`.
 
-你的业务逻辑可能会需要触发（举出（raise）或发出（emit））一个针对特定操作的自定义事件（参考 __例7__）。你只需要在该操作完成时调用`Observable.notify()`方法即可实现。该方法将任意[事件数据接口](http://docs.nativescript.org/api-reference/interfaces/_data_observable_.eventdata.html)的 **实现（implementer）** 作为事件的数据。它包括该事件的基本信息&mdash;名称（name）作为`eventName`以及一个事件发送者（event sender）的实例，作为`object`。
+你的业务逻辑可能会需要触发（引发（raise）或发出（emit））一个针对特定操作的自定义事件（参考 __例7__）。你只需要在该操作完成时调用`Observable.notify()`方法即可实现该目标。这个方法将任意[事件数据接口](http://docs.nativescript.org/api-reference/interfaces/_data_observable_.eventdata.html)的 **实现（implementer）** 作为事件的数据。它包括该事件的基本信息&mdash;作为`eventName`的事件名称（name）和作为`object`的事件发送者（event sender）的实例。
 
-###Example 7: Creating a custom event.
+### Example 7: Creating a custom event.
+
+### 例7：创建一个自定义事件。
 
 ``` JavaScript
 var eventData = {
@@ -342,9 +346,14 @@ var eventData: observableModule.EventData = {
 }
 this.notify(eventData);
 ```
+
 The minimum information needed to raise an event is the `eventName`&mdash;it will be used to execute all event handlers associated with this event.
 
+引发（raise）一个事件至少需要提供`eventName`&mdash;用于执行所有和该事件关联的事件处理器。
+
 The next step is to hook to this event:
+
+下一步就是挂靠到这个事件上：
 
 ``` JavaScript
 var myCustomObject = new MyClass();
@@ -352,24 +361,47 @@ myCustomObject.on("myCustomEventName", function(eventData){
   console.log(eventData.eventName + " has been raised! by: " + eventData.object);
 })
 ```
+
 A similar logic is implemented for the `propertyChange` event, so if your business logic requires that, `propertyChange` can be emitted manually through the `notify()` method (without using the `Observable.set()` method that also fires the `propertyChange` event).
+
+`propertyChange`事件实现了类似的逻辑。因此，如果你的业务需求需要，你可以通过`notify()`方法主动触发`propertyChange`事件（而无须使用也能触发`propertyChange`事件的`Observable.set()`方法）。
 
 ## Avoiding Memory Leaks
 
+## 避免内存泄漏
+
 Although the radio station comparison is convenient for understanding the concept, events are a bit more complicated on the inside. To be able to notify the listener, the sender contains a pointer to the listener. Even if you set the listener object to `null` or `undefined`, it is not eligible for garbage collection, because the sender is alive and has a live reference to the listener object. This could result in a memory leak when the object lifetimes of the sender and the listener differ significantly.
+
+尽管使用电台做比喻可以方便你理解概念，但是事件在内部实现上更复杂一点。为了能够通知监听器，发送器拥有一个指向监听器的指针。因此即使你将监听器对象设置为`null`或者`undefined`，由于仍存活的发送器中对它的引用，它也不符合垃圾回收器的回收条件。当发送器和监听器的生命周期相差很大时，这将会导致内存泄漏。
 
 Consider this scenario: A UI element creates a lot of child controls, each of which hooks to an event of the parent. Then a child control is released (during a list view scrolling for instance), causing a memory leak.
 
+设想这样一种场景：一个UI元素创建了许多子控件，每个控件都挂靠到了父元素的一个事件上。随后，一个子控件被释放了（比如，在列表视图（list view）的滚动期间），导致了内存泄漏。
+
 To prevent these memory leaks, it is a good practice to remove your event listener handler before releasing the listener object. Unfortunately, sometimes you cannot determine the exact time to call the `off` or `removeEventListener` function. In such cases, use another option of the NativeScript framework: *weak events*.
+
+为了防止这种内存泄漏，在释放监听器对象之前移除事件监听处理器是个好习惯。不幸的是，有时你无法决定确切的调用`off`或者`removeEventListener`函数的时机。在这种情况下，使用NativeScript框架提供的另一种选项：*弱事件（weak events）*。
 
 ## Working with Weak Events
 
+## 使用弱事件
+
 A weak event, as its name suggests, creates an weak reference to the listener object, which helps you release the listener object without removing the event listener pointer.
+
+弱事件（Weak Events），顾名思义，它创建一个到监听器对象的弱引用（weak reference）。这将帮助你在不移除到事件监听器的指针时释放监听器对象。
 
 ### Adding a Weak Event Listener
 
+### 增加一个弱事件监听器
+
 Using weak event listeners is very similar to normal events. __Example 8__ shows how to add a weak event listener (code comments are included for clarity):
-###Example 8: Creating a weak event and handling a property change event 
+
+弱事件监听器的用法和普通事件的很像。__例8__ 展示如何增加一个弱事件监听器（引入了使代码更清楚的注释）：
+
+### Example 8: Creating a weak event and handling a property change event
+
+### 例8：创造一个弱事件并处理一个属性改变（property change）事件
+
 ``` JavaScript
 var weakEventListenerModule = require("ui/core/weak-event-listener");
 var buttonModule = require("ui/button");
@@ -392,16 +424,22 @@ var handlePropertyChange = function () {
 var weakEL = weakEventListenerModule.WeakEventListener;
 var weakEventListenerOptions: weakEventListenerModule.WeakEventListenerOptions = {
   // create a weak reference to the event listener object
+  // 创建一个到事件监听器对象的弱引用
   targetWeakRef: new WeakRef(this),
   // create a weak reference to the event sender object
+  // 创建一个到事件发送器对象的弱引用
   sourceWeakRef: new WeakRef(this.source),
   // set the name of the event
+  // 设置事件的名称
   eventName: observable.Observable.propertyChangeEvent,
   // set the event handler
+  // 设置事件处理器
   handler: handlePropertyChange,
-  // (optional) set the context in which to execute the handler 
+  // (optional) set the context in which to execute the handler
+  // （可选的）设置运行监听器的上下文
   handlerContext: testButton,
-  // (optional) set a specialized property used for extra event recognition 
+  // (optional) set a specialized property used for extra event recognition
+  // （可选的）设置一个专门的用于附加事件识别（recognition）的属性
   key: this.options.targetProperty
 }
 weakEL.addWeakEventListener(this.weakEventListenerOptions);
@@ -428,16 +466,22 @@ var handlePropertyChange = function () {
 var weakEL = weakEventListenerModule.WeakEventListener;
 var weakEventListenerOptions: weakEventListenerModule.WeakEventListenerOptions = {
   // create a weak reference to the event listener object
+  // 创建一个到事件监听器对象的弱引用
   targetWeakRef: new WeakRef(this),
   // create a weak reference to the event sender object
+  // 创建一个到事件发送器对象的弱引用
   sourceWeakRef: new WeakRef(this.source),
   // set the name of the event
+  // 设置事件的名称
   eventName: observable.Observable.propertyChangeEvent,
   // set the event handler
+  // 设置事件处理器
   handler: handlePropertyChange,
   // specialized property used for extra event recognition
+  // 设置一个专门的用于附加事件识别的属性
   key: this.options.targetProperty,
   // (optional) set the context in which to execute the handler
+  // （可选的）设置运行监听器的上下文
   handlerContext: testButton
 }
 weakEL.addWeakEventListener(this.weakEventListenerOptions);
@@ -445,9 +489,15 @@ weakEL.addWeakEventListener(this.weakEventListenerOptions);
 
 __Example 8__ shows how to attach a weak event listener to an observable object instance. A closer look at the `handlePropertyChange` function shows that `text` property of the `this` object is changed when the `propertyChange` event is raised (via the button tap event). The function demonstrates how to use the `handlerContext` property&mdash;its value is taken as an argument to `this` inside the event handler function.
 
+__例8__ 展示了如何将一个弱事件监听器附着到一个可观测对象（observable object）的实例。查看`handlePropertyChange`函数，发现它的`this`对象的`text`属性在`propertyChange`事件（通过按钮触摸事件）引发时被改变了。该函数示范了如何使用`handlerContext`属性&mdash;它的值在事件处理器函数中被用作`this`参数。
+
 ### Removing a Weak Event Listener
 
+### 移除一个弱事件监听器
+
 The `targetWeakRef` and `key` properties are optional when invoking a function on an event. However, they allow for removing an event listener. The properties are used as keys for a key-value pair that stores weak event listeners.
+
+`targetWeakRef`和`key`在向某事件发起（invoke）一个函数时是可选的。然而，它们允许你移除事件监听器。这些属性被用作储存弱类型监听器的键-值对的键名。
 
 ``` JavaScript
 weakEL.removeWeakEventListener(this.weakEventListenerOptions);
